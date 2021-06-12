@@ -2,42 +2,48 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h3>Adicionar participante</h3>
+        <h3>Adicionar Participante</h3>
       </div>
       <div class="card-body">
         <form v-on:submit.prevent="handleSubmitForm()">
           <!-- INÍCIO DO BLOCO: NOME DO PARTICIPANTE -->
           <div class="form-group">
-            <label class="font-weight-bold">Nome do Partipicante</label>
+            <label class="font-weight-bold">Nome do Participante</label>
             <input
               type="text"
-              name=""
-              id=""
+              name="name"
+              id="name"
               class="form-control"
               placeholder="Nome"
-              v-model="participante.username"
-              required
+              v-model="participanteForm.username"
+              :class="{ 'is-invalid': isSubmitted && v$.participanteForm.username.$error }"
             />
+            <!-- <div v-if="isSubmitted && !v$.participanteForm.username.required" class="invalid-feedback"> Informe o nome do participante!
+            </div> -->
           </div>
           <!-- FIM DO BLOCO: NOME DO PARTICIPANTE -->
 
           <!-- INÍCIO DO BLOCO: EMAIL DO PARTICIPANTE -->
           <div class="form-group">
-            <label class="font-weight-bold">Email do Partipicante</label>
+            <label class="font-weight-bold">Email do Participante</label>
             <input
               type="text"
               name=""
               id=""
               class="form-control"
               placeholder="Email"
-              v-model="participante.useremail"
-              required
+              v-model="participanteForm.useremail"
+              :class="{ 'is-invalid': isSubmitted && v$.participanteForm.useremail.$error }"
             />
+            <!-- <div v-if="isSubmitted && !v$.participanteForm.useremail.required" class="invalid-feedback"> Informe o email do participante!
+            </div> -->
           </div>
           <!-- FIM DO BLOCO: EMAIL DO PARTICIPANTE -->
 
           <div class="form-group">
-            <button class="btn btn-primary" type="submit">Adicionar</button>
+            <button class="btn btn-primary" >
+              <font-awesome-icon :icon="['fas', 'user-plus']"/> Add
+            </button>
           </div>
         </form>
       </div>
@@ -47,6 +53,8 @@
 
 <script>
 // import { component } from "vue/types/umd";
+import useValidate from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 
 export default {
   components: {
@@ -54,14 +62,30 @@ export default {
   },
   data() {
     return {
-      participante: {
+      v$: useValidate(),
+      participanteForm: {
         username: '',
         useremail: '',
       },
+      isSubmitted: false,
     };
   },
   methods: {
-    handleSubmitForm() {},
+    handleSubmitForm() {
+      this.v$.$validate(); // Checa todas as entradas
+      if (!this.v$.$error) { // se alguma validação de entrada falhar 
+      } else {
+        this.isSubmitted = true;
+      }
+    },
+  },
+  validations() {
+    return {
+      participanteForm: {
+        username: { required },
+        useremail: { required },
+      },
+    };
   },
 };
 </script>
