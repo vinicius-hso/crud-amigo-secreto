@@ -2,11 +2,59 @@
 
 import Api from './Api';
 
-// Método reponsável por listar todos os 'User'
-// (GET): localhost:3000/api/users
 export default {
+    // Método reponsável por criar um novo 'User'
+    // (POST): localhost:3000/api/users
+    async createNewUser() {
+        try {
+            const response = await Api().post('/users', user);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    // Método responsável por atualizar um 'User' por Id
+    // (PUT): localhost:3000/users/:id
+    async updateUser() {
+        try {
+            const response = await Api().put(`/users/${id}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    // Método responsável por excluir um 'User' por Id
+    // (DELET): localhost:3000/api/users/:id
+    async deleteUser() {
+        try {
+            const response = await Api().delete(`/users/${id}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);            
+        }
+    },
+
+    // Método reponsável por listar todos os 'User'
+    // (GET): localhost:3000/api/users
     async getUsers() {
-        const response = await Api().get('/users');
-        return response.data;
-    }
+        try {
+            const response = await Api().get('/users');
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    // Método responsável por listar os 'User' por Id
+    // (GET): localhost:3000/api/users/:id
+    async getUserId(id) {
+        try {
+            const response = await Api().get(`/users/${id}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    },
 };
