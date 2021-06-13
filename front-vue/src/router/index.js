@@ -4,17 +4,17 @@ import Nprogress from 'nprogress';
 const routes = [
   {
     path: '/',
-    name: 'Create New User',
+    name: 'home',
     component: () => import('../components/create-user/CreateUserComponent.vue'),
   },
   {
     path: '/edit-user/:id',
-    name: 'Edit User',
+    name: 'edit',
     component: () => import('../components/edit-user/EditUserComponent.vue'),
   },
   {
     path: '/list-user',
-    name: 'List All Users',
+    name: 'list',
     component: () => import('../components/list-user/ListUserComponent.vue'),
   },
 ];
