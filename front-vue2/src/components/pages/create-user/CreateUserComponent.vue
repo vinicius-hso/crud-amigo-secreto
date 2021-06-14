@@ -94,6 +94,7 @@ export default {
         }
 
         await UserService.createNewUser(this.participante);
+        // this.$alert("Hello Vue Simple Alert.");
         this.$swal({
           title: 'Participante adicionado com sucesso!',
           icon: 'success',
