@@ -2,7 +2,7 @@
     <div class="container">
       <div class="card">
         <div class="card-header">
-          <h3>Adicionar participante</h3>
+          <h3>Adicionar Participante</h3>
         </div>
         <div class="card-body">
 
@@ -86,15 +86,12 @@ export default {
     async submitNewUser() {
       try {
         this.isSubmitted = true;
-
         this.$v.$touch();
         if (this.$v.$invalid) {
           this.$swal('Oops! Preencha todos os campos!', 'error');
           return;
         }
-
         await UserService.createNewUser(this.participante);
-        // this.$alert("Hello Vue Simple Alert.");
         this.$swal({
           title: 'Participante adicionado com sucesso!',
           icon: 'success',

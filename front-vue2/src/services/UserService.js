@@ -26,12 +26,12 @@ export default {
 
   // Método responsável por excluir um 'User' por Id
   // (DELET): localhost:3000/api/users/:id
-  async deleteUser() {
+  async deleteUser(id) {
     try {
       const response = await Api().delete(`/users/${id}`);
       return response.data;
     } catch (error) {
-      console.log(error);            
+      return console.log(error);            
     }
   },
 
