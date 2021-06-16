@@ -9,18 +9,18 @@ export default {
       const response = await Api().post('/users', participante);
       return response.data;
     } catch (error) {
-      console.log(error);
+      return console.log(error);
     }
   },
 
   // Método responsável por atualizar um 'User' por Id
   // (PUT): localhost:3000/users/:id
-  async updateUser() {
+  async updateUser(id, participante) {
     try {
-      const response = await Api().put(`/users/${id}`);
+      const response = await Api().put(`/users/${id}`, participante);
       return response.data;
     } catch (error) {
-      console.log(error);
+      return console.log(error);
     }
   },
 
@@ -31,7 +31,7 @@ export default {
       const response = await Api().delete(`/users/${id}`);
       return response.data;
     } catch (error) {
-      return console.log(error);            
+      return console.log(error);
     }
   },
 
@@ -42,7 +42,18 @@ export default {
       const response = await Api().get('/users');
       return response.data;
     } catch (error) {
-      console.log(error);
+      return console.log(error);
+    }
+  },
+
+  // Método reponsável por sortear todos os 'User'
+  // (GET): localhost:3000/api/users
+  async sortUsers() {
+    try {
+      const response = await Api().get('/usersSortition');
+      return response.data;
+    } catch (error) {
+      return console.log(error);
     }
   },
 
@@ -53,7 +64,7 @@ export default {
       const response = await Api().get(`/users/${id}`);
       return response.data;
     } catch (error) {
-      console.log(error);
+      return console.log(error);
     }
   },
 };

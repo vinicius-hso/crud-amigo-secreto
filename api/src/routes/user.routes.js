@@ -17,6 +17,9 @@ router.post('/users', userController.createUser);
 // ==> Rota responsável por listar todos os 'Users': (GET): localhost:3000/api/users
 router.get('/users', userController.listAllUsers);
 
+// ==> Rota responsável por sortear todos os 'Users': (GET): localhost:3000/api/users
+router.get('/usersSortition', userController.sortUsers);
+
 // ==> Rota responsável por selecionar 'User' pelo 'Id': (GET): localhost:3000/api/users/:id
 router.get('/users/:id', userController.findUserById);
 

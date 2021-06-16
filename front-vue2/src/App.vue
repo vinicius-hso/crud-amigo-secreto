@@ -12,7 +12,7 @@
           <router-link class="nav-link" to="/list-user">Listar participantes</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/edit-user/:id">Editar participantes</router-link>
+          <router-link class="nav-link" to="/sortition">Sortear</router-link>
         </li>
       </ul>
       </div>

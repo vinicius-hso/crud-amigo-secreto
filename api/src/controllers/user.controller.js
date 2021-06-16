@@ -23,6 +23,13 @@ exports.listAllUsers = async (req, res) => {
     return res.status(200).send(response.rows);
 };
 
+// ==> Método responsável por realizar o sorteio todos os 'Users':
+exports.sortUsers = async (req, res) => {
+    const response = await db.query('SELECT * FROM users ORDER BY random()');
+
+    return res.status(200).send(response.rows);
+};
+
 // ==> Método responsável por selecionar 'User' pelo 'Id':
 exports.findUserById = async (req, res) => {
     const userId = parseInt(req.params.id);
@@ -47,10 +54,3 @@ exports.deleteUserById = async (req, res) => {
     await db.query('DELETE FROM users WHERE user_id = $1', [userId]);
     return res.status(200).send({ message: 'User deleted successfully!', userId });
 }
-
-// // ==> Método responsável por sortear um par de 'User':
-// exports.sortUserPair = async (req, res) => {
-//     const response = await db.query(`SELECT * FROM users ORDER BY RANDOM() LIMIT 3`)
-
-//     return res.status(200).send(response.rows);
-// }

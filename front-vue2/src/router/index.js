@@ -20,6 +20,11 @@ const routes = [
     name: 'edit',
     component: () => import('../components/pages/edit-user/EditUserComponent.vue'),
   },
+  {
+    path: '/sortition',
+    name: 'sortition',
+    component: () => import('../components/pages/sortition/SortitionComponent.vue'),
+  },
 ];
 
 const router = new VueRouter({
