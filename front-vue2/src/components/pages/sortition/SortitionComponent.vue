@@ -30,6 +30,7 @@
 </template>
 
 <script>
+// import $ from 'jquery';
 import UserService from '../../../services/UserService';
 
 export default {
@@ -54,7 +55,22 @@ export default {
       const i = this.presenteados[0];
       this.presenteados.shift();
       this.presenteados.push(i);
+
+      const data = {
+        email: 'viniciushsoliveira@gmail.com',
+        text: 'Você está participando do Amigo Secreto!',
+      };
+      // $.post('/api/email', data, () => {
+      //   console.log('Server received our data!');
+      // });
     },
+    // async sendEmail() {
+    //   try {
+    //     await UserService.sendEmail(this.data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
   },
 };
 </script>

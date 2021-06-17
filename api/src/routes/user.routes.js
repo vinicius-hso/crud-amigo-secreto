@@ -29,7 +29,7 @@ router.put('/users/:id', userController.updateUserById);
 // ==> Rota responsável por excluir 'User' pelo 'Id': (DELETE): localhost:3000/api/users/:id
 router.delete('/users/:id', userController.deleteUserById);
 
-// // ==> Rota responsável por sortear um par de 'User': (GET): localhost:3000/api/users
-// router.get('/users', userController.sortUserPair);
+// ==> Rota responsável por realizar o envio de email (POST): localhost:3000/api/users/:id
+// router.post('/email', userController.sendEmail);
 
 module.exports = router;

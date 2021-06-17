@@ -54,3 +54,18 @@ exports.deleteUserById = async (req, res) => {
     await db.query('DELETE FROM users WHERE user_id = $1', [userId]);
     return res.status(200).send({ message: 'User deleted successfully!', userId });
 }
+
+// exports.sendEmail = async (req, res) => {
+//     // send email here
+//     const { email, text } = req.body;
+//     console.log('Data: ', req.body);
+
+//     sendEmail(email, text, function(err, data) {
+//         if (err) {
+//             res.status(500).json({ message: 'Internal error!' });
+//         } else {
+//             res.json({ message: 'Email sent!' });
+//         }
+//     });
+//     return res.json({ message: 'Message received!'})
+// };
