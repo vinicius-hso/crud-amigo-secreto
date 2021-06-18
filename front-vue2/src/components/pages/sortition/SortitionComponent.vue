@@ -3,8 +3,11 @@
         <div class="card">
           <div class="card-header">
             <h3 class="text-center">Participantes</h3>
-            <button type="submit" class="btn btn-success" @click="sortition()">Sortear</button>
+            <div class="btn-div">
+              <button type="submit" class="btn btn-success" @click="sortition()">Sortear</button>
+            </div>
           </div>
+        <!-- INÍCIO --- GERA UMALISTA DE COM OS SORTEADOS -->
           <!-- <div v-if="sorteados"  class="card-body">
             <table class="table table-striped">
               <thead>
@@ -25,6 +28,7 @@
               </tbody>
             </table>
           </div> -->
+        <!-- FIM --- GERA UMALISTA DE COM OS SORTEADOS -->
         </div>
       </div>
 </template>
@@ -68,7 +72,7 @@ export default {
         message: this.message,
       };
       try {
-        emailjs.send('service_gx979cr', 'template_f0hzs8t', templateParams, 'user_8NIL0GZcXZVUfsw81sc53');
+        emailjs.send('SERVICE_ID', 'TEMPLATE_ID', templateParams, 'USER_ID');
       } catch (error) {
         console.log(error);
       }
@@ -89,16 +93,15 @@ export default {
       });
       while (sort.length > 0) {
         this.name = sortName[0];
-        console.log(sortName[0]);
         this.email = sort[0];
-        console.log(sort[0]);
         this.message = pres[0];
-        console.log(pres[0]);
         sortName.shift();
         sort.shift();
         pres.shift();
-        this.sendEmail();
+        // this.sendEmail();
       }
+      this.$swal('Sucesso!', 'Sorteio realizado! Cheque seu email!', 'success');
+      this.$router.push({ name: 'list' });
     },
   },
 };
@@ -110,6 +113,10 @@ export default {
 }
 
 td{
+  text-align: center;
+}
+
+.btn-div{
   text-align: center;
 }
 </style>
