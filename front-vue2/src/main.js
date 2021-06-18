@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import $ from 'jquery';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueSimpleAlert from 'vue-simple-alert';
 import Vuelidate from 'vuelidate';
@@ -18,7 +17,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 
-Vue.use($);
 Vue.use(VueSimpleAlert);
 Vue.use(VueSweetalert2);
 Vue.use(Vuelidate);

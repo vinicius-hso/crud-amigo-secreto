@@ -3,9 +3,9 @@
         <div class="card">
           <div class="card-header">
             <h3 class="text-center">Participantes</h3>
-            <button class="btn btn-success" @click="sortition()">Sortear</button>
+            <button type="submit" class="btn btn-success" @click="sortition()">Sortear</button>
           </div>
-          <div v-if="sorteados"  class="card-body">
+          <!-- <div v-if="sorteados"  class="card-body">
             <table class="table table-striped">
               <thead>
                 <th class="text-center">Amigo</th>
@@ -24,13 +24,13 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> -->
         </div>
       </div>
 </template>
 
 <script>
-// import $ from 'jquery';
+import emailjs from 'emailjs-com';
 import UserService from '../../../services/UserService';
 
 export default {
@@ -39,6 +39,9 @@ export default {
     return {
       sorteados: [],
       presenteados: [],
+      name: '',
+      email: '',
+      message: '',
     };
   },
   mounted() {
@@ -55,22 +58,48 @@ export default {
       const i = this.presenteados[0];
       this.presenteados.shift();
       this.presenteados.push(i);
-
-      const data = {
-        email: 'viniciushsoliveira@gmail.com',
-        text: 'Você está participando do Amigo Secreto!',
-      };
-      // $.post('/api/email', data, () => {
-      //   console.log('Server received our data!');
-      // });
+      this.teste();
     },
-    // async sendEmail() {
-    //   try {
-    //     await UserService.sendEmail(this.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
+
+    sendEmail() {
+      const templateParams = {
+        name: this.name,
+        email: this.email,
+        message: this.message,
+      };
+      try {
+        emailjs.send('service_gx979cr', 'template_f0hzs8t', templateParams, 'user_8NIL0GZcXZVUfsw81sc53');
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    teste() {
+      const sortName = [];
+      const sort = [];
+      const pres = [];
+      this.sorteados.forEach((element) => {
+        sortName.push(element.username);
+      });
+      this.sorteados.forEach((element) => {
+        sort.push(element.useremail);
+      });
+      this.presenteados.forEach((element) => {
+        pres.push(element.username);
+      });
+      while (sort.length > 0) {
+        this.name = sortName[0];
+        console.log(sortName[0]);
+        this.email = sort[0];
+        console.log(sort[0]);
+        this.message = pres[0];
+        console.log(pres[0]);
+        sortName.shift();
+        sort.shift();
+        pres.shift();
+        this.sendEmail();
+      }
+    },
   },
 };
 </script>
