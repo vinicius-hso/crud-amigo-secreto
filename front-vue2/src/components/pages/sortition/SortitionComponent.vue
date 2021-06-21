@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import emailjs from 'emailjs-com';
+// import emailjs from 'emailjs-com';
 import UserService from '../../../services/UserService';
 
 export default {
@@ -43,9 +43,11 @@ export default {
     return {
       sorteados: [],
       presenteados: [],
-      name: '',
-      email: '',
-      message: '',
+      sorteio: {
+        name: '',
+        email: '',
+        amigo: '',
+      },
     };
   },
   mounted() {
@@ -65,17 +67,8 @@ export default {
       this.teste();
     },
 
-    sendEmail() {
-      const templateParams = {
-        name: this.name,
-        email: this.email,
-        message: this.message,
-      };
-      try {
-        emailjs.send('SERVICE_ID', 'TEMPLATE_ID', templateParams, 'USER_ID');
-      } catch (error) {
-        console.log(error);
-      }
+    async send() {
+      await UserService.sendEmail(this.sorteio);
     },
 
     teste() {
@@ -92,13 +85,13 @@ export default {
         pres.push(element.username);
       });
       while (sort.length > 0) {
-        this.name = sortName[0];
-        this.email = sort[0];
-        this.message = pres[0];
+        this.sorteio.name = sortName[0];
+        this.sorteio.email = sort[0];
+        this.sorteio.amigo = pres[0];
         sortName.shift();
         sort.shift();
         pres.shift();
-        // this.sendEmail();
+        this.send();
       }
       this.$swal('Sucesso!', 'Sorteio realizado! Cheque seu email!', 'success');
       this.$router.push({ name: 'list' });

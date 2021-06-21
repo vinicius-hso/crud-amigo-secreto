@@ -1,3 +1,6 @@
+const nodemailer = require('nodemailer');
+require("dotenv").config()
+
 const db = require("../config/database");
 
 // ==> Método responsável por criar um novo 'User':
@@ -55,17 +58,31 @@ exports.deleteUserById = async (req, res) => {
     return res.status(200).send({ message: 'User deleted successfully!', userId });
 }
 
-// exports.sendEmail = async (req, res) => {
-//     // send email here
-//     const { email, text } = req.body;
-//     console.log('Data: ', req.body);
+exports.sendEmail = async (req, res) => {
+    const { name, email, amigo } = req.body;
 
-//     sendEmail(email, text, function(err, data) {
-//         if (err) {
-//             res.status(500).json({ message: 'Internal error!' });
-//         } else {
-//             res.json({ message: 'Email sent!' });
-//         }
-//     });
-//     return res.json({ message: 'Message received!'})
-// };
+    const transport = nodemailer.createTransport({
+        host:  process.env.SMTP_HOST,
+        port:  process.env.SMTP_PORT,
+        auth: {
+          user:  process.env.SMTP_USER,
+          pass:  process.env.SMTP_PASSWORD
+        }
+    });
+
+    const mailOptions = {
+        from: '"Example Team" <from@example.com>',
+        to: email,
+        subject: 'Amigo Secreto App',
+        // text: `Olá ${name}! Você está participando do Amigo Secreto App! Seu amigo secreto é ${amigo}`,
+        context: {name, amigo},
+        html: `Olá ${name}! Você está participando do Amigo Secreto App! Seu amigo secreto é ${amigo}`
+    };
+
+    transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+    });
+};

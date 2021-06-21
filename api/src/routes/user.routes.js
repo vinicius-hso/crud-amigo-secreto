@@ -30,6 +30,6 @@ router.put('/users/:id', userController.updateUserById);
 router.delete('/users/:id', userController.deleteUserById);
 
 // ==> Rota responsável por realizar o envio de email (POST): localhost:3000/api/users/:id
-// router.post('/email', userController.sendEmail);
+router.post('/email', userController.sendEmail);
 
 module.exports = router;

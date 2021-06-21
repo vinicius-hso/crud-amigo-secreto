@@ -67,4 +67,13 @@ export default {
       return console.log(error);
     }
   },
+
+  async sendEmail(info) {
+    try {
+      const response = await Api().post('/email', info);
+      return response.data;
+    } catch (error) {
+      return console.log(error);
+    }
+  },
 };
